@@ -8,6 +8,7 @@ from gameparser import *
 
 
 def list_of_items(items):
+    #takes objects in items.py andassigns them to a new list called str_items which are seperated with a comma
     str_items=[]
     for i in items:
         str_items.append(i["name"])
@@ -34,7 +35,7 @@ def list_of_items(items):
 
 
 def print_room_items(room):
-
+    #checks if there are items in the current room and if there are it displays what items
     if len(list_of_items(room["items"])) != 0:
         print("There is " , list_of_items(room["items"]) , " here")
 
@@ -66,6 +67,7 @@ def print_room_items(room):
 
 
 def print_inventory_items(items):
+    #displays items in inventory if there are any
     if len(items) != 0:
         print(" You have " , list_of_items(items) )
 
@@ -249,9 +251,10 @@ def is_valid_exit(exits, chosen_exit):
 
 
 def execute_go(direction):
-
+    
+    #create a global value so that the value is not only in this local function but all the program
     global current_room
-
+    #if the exit entered is valid and exists it moves the player to that room 
     if is_valid_exit(current_room["exits"],direction):
         current_room = move(current_room["exits"],direction)
     else:
@@ -269,7 +272,7 @@ def execute_go(direction):
 
 
 def execute_take(item_id):
-    
+    #checks if the item is in the room if it is it removes it from the room and inserts it in the inventory using remove and append
     item_available=False
 
     for item in current_room["items"]:
@@ -297,6 +300,7 @@ def execute_take(item_id):
 
 
 def execute_drop(item_id):
+    #checks if the item is in the inventory if it is it removes it from the invntory and drops it in the room using remove and append
     item_available=False
 
     for item in inventory:
